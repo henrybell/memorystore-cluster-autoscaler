@@ -37,6 +37,14 @@ const AutoscalerDirection = {
 };
 
 /**
+ * @enum {string}
+ */
+const AutoscalerEngine = {
+  REDIS: 'REDIS',
+  VALKEY: 'VALKEY',
+};
+
+/**
  * @typedef {{
  *    currentSize: number,
  *    shardCount: number,
@@ -79,6 +87,7 @@ const AutoscalerDirection = {
  *    projectId: string,
  *    regionId: string,
  *    clusterId: string,
+ *    engine?: AutoscalerEngine,
  *    units: AutoscalerUnits,
  *    minSize: number,
  *    maxSize: number,
@@ -143,4 +152,5 @@ const AutoscalerDirection = {
 module.exports = {
   AutoscalerUnits,
   AutoscalerDirection,
+  AutoscalerEngine,
 };

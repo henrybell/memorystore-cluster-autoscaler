@@ -88,6 +88,7 @@ module "autoscaler-scheduler" {
   project_id               = var.project_id
   location                 = var.region
   memorystore_cluster_name = var.memorystore_cluster_name
+  memorystore_engine       = var.memorystore_engine
   pubsub_topic             = module.autoscaler-functions.poller_topic
   target_pubsub_topic      = module.autoscaler-functions.scaler_topic
 
@@ -95,6 +96,7 @@ module "autoscaler-scheduler" {
   spanner_state_name       = var.spanner_state_name
   spanner_state_database   = var.spanner_state_database
   firestore_state_database = var.firestore_state_database
+
 
   // Example of passing config as json
   // json_config             = base64encode(jsonencode([{
@@ -115,6 +117,8 @@ module "autoscaler-network" {
   region     = var.region
   project_id = var.project_id
   ip_range   = var.ip_range
+
+  memorystore_engine = var.memorystore_engine // Required for PSC service class
 }
 
 module "autoscaler-memorystore-cluster" {
@@ -135,6 +139,7 @@ module "autoscaler-memorystore-cluster" {
 
   memorystore_shard_count   = var.memorystore_shard_count
   memorystore_replica_count = var.memorystore_replica_count
+  memorystore_engine        = var.memorystore_engine
 
   depends_on = [module.autoscaler-network]
 }
@@ -157,4 +162,5 @@ module "autoscaler-monitoring" {
   region                   = var.region
   project_id               = var.project_id
   memorystore_cluster_name = var.memorystore_cluster_name
+  memorystore_engine       = var.memorystore_engine
 }
